@@ -21,6 +21,7 @@ def parse_args():
 
     return parser.parse_args()
 
+
 def font_start_checker(line):
     if not line.strip():
         return True
@@ -43,13 +44,13 @@ def txt_to_png(file_orig_path, file_full_path, width, height, sigma):
         for line in lines:
             if font_start_checker(line):  # endl
                 # save
-                font_image = gaussian_filter(font_array, sigma=sigma)
+                font_blurred_array = gaussian_filter(font_array, sigma=sigma)
                 fig = plt.figure(frameon=False)
                 fig.set_size_inches(width, height)
                 ax = plt.Axes(fig, [0., 0., 1., 1.])
                 ax.set_axis_off()
                 fig.add_axes(ax)
-                ax.imshow(font_image, aspect='auto', cmap='Greys')
+                ax.imshow(font_blurred_array, aspect='auto', cmap='Greys')
                 fig.savefig('phd08_png_results/' + file_orig_path +
                             '/' + font_name + '.png', dpi=1)
                 plt.close(fig)
