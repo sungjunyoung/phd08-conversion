@@ -29,7 +29,7 @@ def font_start_checker(line):
         return False
 
 
-def file_to_arr(file_orig_path, file_full_path, width, height, sigma):
+def txt_to_png(file_orig_path, file_full_path, width, height, sigma):
     file_orig_path = file_orig_path[:-4]
     save_dir = 'phd08_png_results/' + file_orig_path
     if not os.path.exists('phd08_png_results/' + file_orig_path):
@@ -96,7 +96,7 @@ def main():
             if file[0] == '.':
                 continue
             print("INFO:: converting " + file + "...")
-            file_to_arr(file, args.data_dir + '/' + file, args.width, args.height, args.gaussian_sigma)
+            txt_to_png(file, args.data_dir + '/' + file, args.width, args.height, args.gaussian_sigma)
 
     print("INFO:: all files converted to png, results in phd08_png_results/")
 
