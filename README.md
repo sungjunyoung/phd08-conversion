@@ -24,6 +24,10 @@ python phd08_to_png.py --data_dir=DATA_DIR [--width=WIDTH] [--height=HEIGHT]
 ```
 
 2. **phd08** to **np.array text files**
+
+
+### phd08_to_np_arr.py
+0. **help**
 ```
-python phd08_to_np_array.py
+python phd08_to_np_arr.py --help
 ```
