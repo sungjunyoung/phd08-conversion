@@ -1,6 +1,3 @@
-# **ON DEVELOPING!!**
-
-
 ## PHD08 Conversion
 
 > [phd08](https://www.dropbox.com/s/69cwkkqt4m1xl55/phd08.alz?dl=0) 
@@ -44,6 +41,6 @@ phd08_to_npy.py [-h] --data_dir DATA_DIR [--one_hot] [--width WIDTH]
 ```
 python phd08_to_png.py --data_dir=phd08_png_results --width=10 --height=10
 ```
-![screenshot1](./images/screenshot_1.png)
-
 ![screenshot2](./images/screenshot_2.png)
+
+![screenshot1](./images/screenshot_1.png)
