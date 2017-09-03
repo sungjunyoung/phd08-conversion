@@ -16,6 +16,8 @@ def parse_args():
                         help='png 로 저장할때의 가로 픽셀', required=False)
     parser.add_argument('--height', type=int, default=60,
                         help='png 로 저장할때의 세로 픽셀', required=False)
+    parser.add_argument('--gaussian_sigma', type=float, default=.8,
+                        help='가우시안 필터 적용 시 시그마 값', required=False)
 
     return parser.parse_args()
 
@@ -27,7 +29,7 @@ def font_start_checker(line):
         return False
 
 
-def file_to_arr(file_orig_path, file_full_path, width, height):
+def file_to_arr(file_orig_path, file_full_path, width, height, sigma):
     file_orig_path = file_orig_path[:-4]
     save_dir = 'phd08_png_results/' + file_orig_path
     if not os.path.exists('phd08_png_results/' + file_orig_path):
@@ -45,7 +47,7 @@ def file_to_arr(file_orig_path, file_full_path, width, height):
                 # print(font_array)
 
                 # save
-                font_image = gaussian_filter(font_array, sigma=.8)
+                font_image = gaussian_filter(font_array, sigma=sigma)
                 fig = plt.figure(frameon=False)
                 fig.set_size_inches(width, height)
                 ax = plt.Axes(fig, [0., 0., 1., 1.])
@@ -94,9 +96,9 @@ def main():
             if file[0] == '.':
                 continue
             print("INFO:: converting " + file + "...")
-            file_to_arr(file, args.data_dir + '/' + file, args.width, args.height)
+            file_to_arr(file, args.data_dir + '/' + file, args.width, args.height, args.gaussian_sigma)
 
-    print("INFO:: all files converted to png, results in phd_088_png_results")
+    print("INFO:: all files converted to png, results in phd08_png_results/")
 
 if __name__ == '__main__':
     main()
