@@ -21,7 +21,6 @@ def parse_args():
 
     return parser.parse_args()
 
-
 def font_start_checker(line):
     if not line.strip():
         return True
@@ -42,10 +41,7 @@ def txt_to_png(file_orig_path, file_full_path, width, height, sigma):
         font_name = ''
         real_data_counter = 0
         for line in lines:
-            # endl
-            if font_start_checker(line):
-                # print(font_array)
-
+            if font_start_checker(line):  # endl
                 # save
                 font_image = gaussian_filter(font_array, sigma=sigma)
                 fig = plt.figure(frameon=False)
@@ -61,10 +57,8 @@ def txt_to_png(file_orig_path, file_full_path, width, height, sigma):
                 not_data_checker = 0
                 font_counter += 1
                 real_data_counter = 0
-                # break
                 continue
-            # not endl
-            else:
+            else:  # not endl
                 not_data_checker += 1
                 if not_data_checker == 1:  # font name
                     font_name = line.strip()
@@ -73,7 +67,6 @@ def txt_to_png(file_orig_path, file_full_path, width, height, sigma):
                     arr_height = int(line.split(' ')[0])
                     arr_width = int(line.split(' ')[1])
                     font_array = np.zeros(shape=(arr_height, arr_width))
-                    # print(line)
                     continue
                 else:  # this is real data
                     font_array[real_data_counter] = list(map(int, line.strip()))
@@ -99,6 +92,7 @@ def main():
             txt_to_png(file, args.data_dir + '/' + file, args.width, args.height, args.gaussian_sigma)
 
     print("INFO:: all files converted to png, results in phd08_png_results/")
+
 
 if __name__ == '__main__':
     main()
