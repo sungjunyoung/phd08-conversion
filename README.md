@@ -25,6 +25,7 @@ python phd08_to_png.py --help
 python phd08_to_png.py --data_dir=DATA_DIR [--width=WIDTH] 
                        [--height=HEIGHT] [--gaussian_sigma=GAUSSIAN_SIGMA]  
 ```
+> result in ./phd08_png_results/
 
 ### phd08_to_np_arr.py
 - **help**
@@ -36,8 +37,8 @@ python phd08_to_np_arr.py --help
 ```
 phd08_to_npy.py [-h] --data_dir DATA_DIR [--one_hot] [--width WIDTH]
                      [--height HEIGHT] [--gaussian_sigma GAUSSIAN_SIGMA]
-
 ```
+> result in ./phd08_npy_results/
 
 ## Example & Screenshot
 ```
