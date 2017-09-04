@@ -30,6 +30,7 @@ def font_start_checker(line):
 
 def txt_to_npy(all_file_count, index, data, labels,
                file_full_path, width, height, sigma, is_one_hot):
+    index -= 1
     with open(file_full_path, 'r') as lines:
         font_counter = 0
         not_data_checker = 0
@@ -92,6 +93,8 @@ def main():
 
     data = []
     labels = []
+    # 쪼개서 저장할 사이즈
+    batch_size = 20
 
     print(args)
     # 전체 파일 갯수 체크
@@ -103,24 +106,27 @@ def main():
             all_file_count += 1
 
     for _, _, files in os.walk(args.data_dir):
-
         index = 0
         for file in files:
             if file[0] == '.':
                 continue
-
+            index += 1
             print("INFO:: converting " + file + "...")
             data, labels = txt_to_npy(all_file_count, index, data, labels,
                                       args.data_dir + '/' + file, args.width, args.height, args.gaussian_sigma,
                                       args.one_hot)
-            index += 1
 
-    data = np.array(data, dtype=np.float32)
-    labels = np.array(labels)
-    out_data = save_dir + '/phd08_data'
-    out_labels = save_dir + '/phd08_labels'
-    np.save(out_data, data)
-    np.save(out_labels, labels)
+            if index % batch_size == 0:
+                data = np.array(data, dtype=np.float32)
+                labels = np.array(labels)
+                out_data = save_dir + '/phd08_data_' + str(int(index / batch_size))
+                out_labels = save_dir + '/phd08_labels_' + str(int(index / batch_size))
+                np.save(out_data, data)
+                np.save(out_labels, labels)
+                data = []
+                labels = []
+                print("  FILE_SAVED:: filename : " + save_dir + '/phd08_data_' + str(int(index / batch_size)))
+
 
     print("INFO:: all files converted to npy file, results in phd08_pki_results")
 
