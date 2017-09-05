@@ -10,12 +10,14 @@ def parse_args():
     parser.add_argument('--data_dir', type=str, default='phd08_sample',
                         help='phd08 한글 데이터가 존재하는 디렉토리', required=True)
     parser.add_argument('--one_hot', action='store_true', help='라벨 원 핫 벡터 여부')
-    parser.add_argument('--width', type=int, default=60,
+    parser.add_argument('--width', type=int, default=28,
                         help='저장할때의 가로 어레이 사이즈', required=False)
-    parser.add_argument('--height', type=int, default=60,
+    parser.add_argument('--height', type=int, default=28,
                         help='저장할때의 세로 어레이 사이즈', required=False)
-    parser.add_argument('--gaussian_sigma', type=float, default=.8,
+    parser.add_argument('--gaussian_sigma', type=float, default=.3,
                         help='가우시안 필터 적용 시 시그마 값', required=False)
+    parser.add_argument('--batch_size', type=int, default=2,
+                        help='몇개의 글자씩 합쳐서 저장할 것인지 (max 10)', required=False)
 
     return parser.parse_args()
 
@@ -94,7 +96,7 @@ def main():
     data = []
     labels = []
     # 쪼개서 저장할 사이즈
-    batch_size = 20
+    batch_size = args.batch_size
 
     print(args)
     # 전체 파일 갯수 체크
@@ -127,7 +129,7 @@ def main():
                 labels = []
                 print("  FILE_SAVED:: filename : " + save_dir + '/phd08_data_' + str(int(index / batch_size)))
 
-    print("INFO:: all files converted to npy file, results in phd08_pki_results")
+    print("INFO:: all files converted to npy file, results in phd08_npy_results")
 
 
 if __name__ == '__main__':

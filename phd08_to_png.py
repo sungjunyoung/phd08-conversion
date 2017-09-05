@@ -1,5 +1,3 @@
-# -*- coding: cp949 -*-
-
 import argparse
 import os
 import numpy as np
@@ -8,16 +6,16 @@ from scipy.ndimage.filters import gaussian_filter
 
 
 def parse_args():
-    desc = "phd08 ÇÑ±Û ÅØ½ºÆ® µ¥ÀÌÅÍ¸¦ .png Æ÷¸ËÀ¸·Î º¯È¯ÇØÁÖ´Â ½ºÅ©¸³Æ®ÀÔ´Ï´Ù."
+    desc = "phd08 í•œê¸€ í…ìŠ¤íŠ¸ ë°ì´í„°ë¥¼ .png í¬ë§·ìœ¼ë¡œ ë³€í™˜í•´ì£¼ëŠ” ìŠ¤í¬ë¦½íŠ¸ì…ë‹ˆë‹¤."
     parser = argparse.ArgumentParser(description=desc)
     parser.add_argument('--data_dir', type=str, default='phd08_sample',
-                        help='phd08 ÇÑ±Û µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏ´Â µğ·ºÅä¸®', required=True)
-    parser.add_argument('--width', type=int, default=60,
-                        help='png ·Î ÀúÀåÇÒ¶§ÀÇ °¡·Î ÇÈ¼¿', required=False)
-    parser.add_argument('--height', type=int, default=60,
-                        help='png ·Î ÀúÀåÇÒ¶§ÀÇ ¼¼·Î ÇÈ¼¿', required=False)
-    parser.add_argument('--gaussian_sigma', type=float, default=.8,
-                        help='°¡¿ì½Ã¾È ÇÊÅÍ Àû¿ë ½Ã ½Ã±×¸¶ °ª', required=False)
+                        help='phd08 í•œê¸€ ë°ì´í„°ê°€ ì¡´ì¬í•˜ëŠ” ë””ë ‰í† ë¦¬', required=True)
+    parser.add_argument('--width', type=int, default=28,
+                        help='png ë¡œ ì €ì¥í• ë•Œì˜ ê°€ë¡œ í”½ì…€', required=False)
+    parser.add_argument('--height', type=int, default=28,
+                        help='png ë¡œ ì €ì¥í• ë•Œì˜ ì„¸ë¡œ í”½ì…€', required=False)
+    parser.add_argument('--gaussian_sigma', type=float, default=.3,
+                        help='ê°€ìš°ì‹œì•ˆ í•„í„° ì ìš© ì‹œ ì‹œê·¸ë§ˆ ê°’', required=False)
 
     return parser.parse_args()
 
@@ -80,9 +78,9 @@ def main():
     if args is None:
         exit()
 
-    # Á¸ÀçÀ¯¹« Ã¼Å©
+    # ì¡´ì¬ìœ ë¬´ ì²´í¬
     if not os.path.exists(args.data_dir):
-        print("ERROR::" + args.data_dir, " ´Â Á¸ÀçÇÏÁö ¾Ê´Â Æú´õÀÔ´Ï´Ù.")
+        print("ERROR::" + args.data_dir, " ëŠ” ì¡´ì¬í•˜ì§€ ì•ŠëŠ” í´ë”ì…ë‹ˆë‹¤.")
         exit()
 
     for _, _, files in os.walk(args.data_dir):
